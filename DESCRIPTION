@@ -1,0 +1,28 @@
+Package: schron
+Title: Bayesian chronologies for multiple sedimentary records with shared events
+Version: 0.0.0.1
+Authors@R: person("Rodrigo", "Vega", email = "rmvega@uach.cl", role = c("aut", "cre"))
+Description: Provides classes and methods to build chronologies for multiple related sedimentary records, using bayesian techniques to combine dating data with stratigraphic knowledge about synchronous events. 
+Depends: R (>= 3.3.3)
+Imports: methods, sp
+License: GPL-3 + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests: testthat,
+    knitr,
+    rmarkdown
+Collate:
+    'utils.r'
+    'class_coreData.r'
+    'class_coreSetInfo.r'
+    'class_coreSetHiatus.r'
+    'class_coreSetEvents.r'
+    'class_coreSetAges.r'
+    'class_coreSet.r'
+    'class_proxyData.r'
+    'class_rawCore.r'
+    'class_subCore.r'
+    'schron-package.r'
+RoxygenNote: 6.0.1.9000
+Roxygen: list(markdown = TRUE)
+VignetteBuilder: knitr
