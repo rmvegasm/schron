@@ -10,6 +10,17 @@
 ## After a lot of thinking i haven't found a way to avoid duplication here
 ## and still get the desired functionality... any ideas are welcomed
 
+#' @title A class to represent arbitrary data for a core
+#'
+#' @description Class `proxyData` holds arbitrary data within a spreadsheet-like
+#' structure. It resembles a `data.frame` in that it behaves both as a `list`
+#' and a `matrix`, and represents a series of observations (rows) of one or more
+#' variables (columns).
+#'
+#' @slot names a `character` vector giving the names for each variable
+#'
+#' @slot data a `list` of equal length vectors
+#'
 #' @include utils.r
 #' @family core data classes 
 
