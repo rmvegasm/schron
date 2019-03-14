@@ -1,1 +1,5 @@
 inst/doc
+prototypes
+.RData
+.RHistory
+input_files
