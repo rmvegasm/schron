@@ -3,7 +3,7 @@ core <- function (name, dates, events, extent, year) {
   out <- structure(
     list(
       dates  = tibble::as.tibble(dates),
-      events = tibble::as.tibble(events)
+      events = tibble::as.tibble(events),
       name   = name,
       extent = extent,
       year   = year,
