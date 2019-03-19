@@ -3,3 +3,4 @@ prototypes
 .RData
 .RHistory
 input_files
+.Rbuilignore

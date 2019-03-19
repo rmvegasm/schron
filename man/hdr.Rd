@@ -17,7 +17,7 @@ gives probabilities.}
 
 \item{int}{A numeric vector describing the \emph{size} of the desired range, as a
 percentage. The default, \code{c(95, 99)}, will give the intervals that account
-for 95% and 99% of the probability.}
+for 95\% and 99\% of the probability.}
 }
 \description{
 Computes the interval holding the desired probability density
@@ -28,8 +28,3 @@ This is a generic function. The default method takes a \code{value} and a
 \code{prob} vector and finds the range(es) within \code{value} holding the probability
 density defined by \code{int}.
 }
-\section{Methods (by class)}{
-\itemize{
-\item \code{default}: 
-}}
-

@@ -66,6 +66,8 @@ init <- function (x, ...) UseMethod('init')
 #'
 #' @export
 normalize <- function (x, ...) UseMethod('normalize')
+
+#' @rdname normalize
 normalize.default <- function (x) x / sum(x)
 
 #' @title Compute highest density region
@@ -80,7 +82,7 @@ normalize.default <- function (x) x / sum(x)
 #' @export
 hdr <- function (x, ...) UseMethod('hdr')
 
-#' @describeIn hdr
+#' @rdname hdr
 #'
 #' @param value A numeric vector of values for which the probability function
 #' gives probabilities.
@@ -89,7 +91,7 @@ hdr <- function (x, ...) UseMethod('hdr')
 #'
 #' @param int A numeric vector describing the *size* of the desired range, as a
 #' percentage. The default, `c(95, 99)`, will give the intervals that account
-#' for 95% and 99% of the probability.
+#' for 95\% and 99\% of the probability.
 #'
 #' @export
 hdr.default <- function (value, prob, int = NULL) {

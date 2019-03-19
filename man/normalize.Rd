@@ -2,9 +2,12 @@
 % Please edit documentation in R/generics.r
 \name{normalize}
 \alias{normalize}
+\alias{normalize.default}
 \title{Normalize a vector of probabilities}
 \usage{
 normalize(x, ...)
+
+\method{normalize}{default}(x)
 }
 \arguments{
 \item{x}{A numeric vector of probabilies, or an object from a class for which

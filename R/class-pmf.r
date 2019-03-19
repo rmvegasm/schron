@@ -1,4 +1,22 @@
 ## -- Constructor function ---------------------------------
+#' @title Informal class to hold a probability mass function
+#'
+#' @description A constructor function for objects of class `pmf`, either from
+#' the values and associated probability mass or from a sample of the desired
+#' distribution.
+#' 
+#' @param x a numeric vector. This optional argument is used to compute a `pmf`
+#' from a sample, in which case this should be the only argument.
+#'
+#' @param value a numeric vector containing the possible values within the `pmf`
+#' support range.
+#'
+#' @param prob a numeric vector containing the probability mass associated with
+#' each `value`.
+#'
+#' @return a `list` with `$value` and `$prob` of class `pmf`.
+#'
+#' @export
 pmf <- function (x = NULL, value, prob) {
   if (!is.null(x)) {
     x <- as.integer(x)
@@ -35,11 +53,13 @@ init.pmf <- function (x) {
   x %<>% sort() %>% normalize()
 }
 ## -- Other methods ----------------------------------------
+
 #' @export
 normalize.pmf <- function (x) {
   x$prob <- normalize(x$prob)
   x
 }
+
 #' @export
 sort.pmf <- function (x, ...) {
   ord <- order(x$value, ...)
@@ -47,10 +67,12 @@ sort.pmf <- function (x, ...) {
   x$prob  <- x$prob[ord]
   x
 }
+
 #' @export
 sample.pmf <- function (x, size) {
   sample(x$value, size = size, replace = TRUE, prob = x$prob)
 }
+
 #' @export
 plot.pmf <- function (x, nb = NULL, density = NULL, angle = 45, col = NA,    
                       border = NULL, lty = par('lty'), lwd = par('lwd'),
@@ -76,7 +98,13 @@ plot.pmf <- function (x, nb = NULL, density = NULL, angle = 45, col = NA,
     )
   invisible()
 }
+
 #' @export
 hdr.pmf <- function (x, ...) {
   with(x, hdr(value, prob, ...))
+}
+
+#' @export
+summary.pmf <- function (x) {
+  summary(sample(x, size = 1000))
 }
