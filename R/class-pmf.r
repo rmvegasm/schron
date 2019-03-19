@@ -35,44 +35,48 @@ init.pmf <- function (x) {
   x %<>% sort() %>% normalize()
 }
 ## -- Other methods ----------------------------------------
+#' @export
 normalize.pmf <- function (x) {
   x$prob <- normalize(x$prob)
   x
 }
+#' @export
 sort.pmf <- function (x, ...) {
   ord <- order(x$value, ...)
   x$value <- sort(x$value, ...)
   x$prob  <- x$prob[ord]
   x
 }
-plot.pmf <- function (x, pretty = TRUE, ...) {
-  if (pretty) {
-	  nb     <- with(x, nclass.Sturges(value))
-	  breaks <- with(x, pretty(value, n = nb))
-	  eqdist <- unique(diff(breaks))
-	  stopifnot(length(eqdist) == 1L)
-	  mids   <- breaks[-length(breaks)] + diff(breaks) / 2
-	  pooled <- numeric()
-	  for (i in seq.int(mids)) {
-	    them      <- with(x, value >= breaks[i] & value < breaks[i + 1L])
-	    pooled[i] <- with(x, sum(prob[them]))
-	  }
-	  x <- pmf(value = mids, prob = pooled)
-  } else {
-    eqdist <- min(unique(with(x, diff(value))))
-    stopifnot(length(eqdist) == 1L)
+#' @export
+sample.pmf <- function (x, size) {
+  sample(x$value, size = size, replace = TRUE, prob = x$prob)
+}
+#' @export
+plot.pmf <- function (x, nb = NULL, density = NULL, angle = 45, col = NA,    
+                      border = NULL, lty = par('lty'), lwd = par('lwd'),
+                      add = FALSE, ...) {
+  smpl   <- sample(x, size = 1000)
+  nb     <- if (is.null(nb)) nclass.Sturges(smpl) else nb
+  breaks <- pretty(smpl, n = nb)
+  eqdist <- unique(diff(breaks))
+  stopifnot(length(eqdist) == 1L)
+  mids   <- breaks[-length(breaks)] + eqdist / 2
+  pooled <- numeric()
+  for (i in seq.int(mids)) {
+    them      <- with(x, value >= breaks[i] & value < breaks[i + 1L])
+    pooled[i] <- with(x, sum(prob[them]))
   }
-  with(x, plot(value, prob, type = 'n', bty = 'n', ...))
-  with(x, rect(
-    xleft   = value - eqdist / 2,
+  if (!add) plot(mids, pooled, type = 'n', bty = 'n', ...)
+  rect(
+    xleft   = mids - eqdist / 2,
     ybottom = 0,
-    xright  = value + eqdist / 2,
-    ytop    = prob,
-    ...
+    xright  = mids + eqdist / 2,
+    ytop    = pooled,
+    density, angle, col, border, lty, lwd
     )
-  )
   invisible()
 }
+#' @export
 hdr.pmf <- function (x, ...) {
   with(x, hdr(value, prob, ...))
 }

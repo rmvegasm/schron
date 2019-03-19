@@ -106,3 +106,6 @@ hdr.default <- function (value, prob, int = NULL) {
   }
   out
 }
+
+sample.default <- base::sample
+sample <- function (x, ...) UseMethod('sample')
