@@ -76,7 +76,7 @@ sample.pmf <- function (x, size) {
 #' @export
 plot.pmf <- function (x, nb = NULL, density = NULL, angle = 45, col = NA,    
                       border = NULL, lty = par('lty'), lwd = par('lwd'),
-                      add = FALSE, ...) {
+                      add = FALSE, xlab = 'value', ylab = 'probability mass', ...) {
   smpl   <- sample(x, size = 1000)
   nb     <- if (is.null(nb)) nclass.Sturges(smpl) else nb
   breaks <- pretty(smpl, n = nb)
@@ -88,7 +88,7 @@ plot.pmf <- function (x, nb = NULL, density = NULL, angle = 45, col = NA,
     them      <- with(x, value >= breaks[i] & value < breaks[i + 1L])
     pooled[i] <- with(x, sum(prob[them]))
   }
-  if (!add) plot(mids, pooled, type = 'n', bty = 'n', ...)
+  if (!add) plot(mids, pooled, type = 'n', bty = 'n', xlab = xlab, ylab = ylab, ...)
   rect(
     xleft   = mids - eqdist / 2,
     ybottom = 0,
