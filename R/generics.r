@@ -58,7 +58,7 @@ init <- function (x, ...) UseMethod('init')
 #' the probabilities within the object, and return the modified version of that
 #' object.
 #'
-#' @param x A numeric vector of probabilies, or an object from a class for which
+#' @param x A numeric vector of probabilities, or an object from a class for which
 #' a method has been defined.
 #'
 #' @return A numeric vector, or an object from a class for which a method has
