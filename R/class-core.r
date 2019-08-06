@@ -2,11 +2,11 @@
 core <- function (name, dates, events, extent, year) {
   out <- structure(
     list(
-      dates  = tibble::as.tibble(dates),
-      events = tibble::as.tibble(events),
+      dates  = tibble::as_tibble(dates),
+      events = tibble::as_tibble(events),
       name   = name,
       extent = extent,
-      year   = year,
+      year   = year
     ),
     class  = 'core')
   if (valid(out)) out
@@ -28,6 +28,14 @@ valid.core <- function (x) {
     length(x$extent) == 1L,
     length(x$year)   == 1L
   )
-  if (all(c(cls,len))) return(TRUE)
-  stop('invalid core... i know i should tell you why...')
+  msg <- c(
+    '`dates` should be a tibble, or coersible to one',
+    '`events` should be a tibble, or coersible to one',
+    '`name` should be a character',
+    '`extent` should be numeric',
+    '`year` should be an integer'
+  )
+  cond <- c(cls, len)
+  if (all(cond)) return(TRUE)
+  stop(paste('\n', c('invalid core:', msg[!cond])))
 }
