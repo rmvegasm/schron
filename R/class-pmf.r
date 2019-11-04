@@ -106,5 +106,12 @@ hdr.pmf <- function (x, ...) {
 
 #' @export
 summary.pmf <- function (x) {
-  summary(sample(x, size = 1000))
+  out <- with(x, c(
+                   min(value),
+                   value[findInterval(c(.25, .5, .75), cumsum(prob))],
+                   max(value)
+                   )
+  )
+  names(out) <- c("Min.", "1st Qu.", "Median", "3rd Qu.", "Max.")
+  out
 }
